@@ -1,0 +1,133 @@
+html, body {
+            font-family: Arial, sans-serif;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            height: 100%;
+            position: relative;
+            padding: 0;
+            margin: 0;
+        }
+        
+        input {
+            font-size: 12px;
+        }
+        
+        h1 {
+            color: #fff;
+            font-size: 22px;
+            margin: 0 0 10px 0;
+            text-align: center;
+            padding-left: 15px;
+        }
+        
+        #hide-listings,
+        #show-listings {
+            width: 48%;
+        }
+        
+        #map {
+            bottom: 0px;
+            height: 100%;
+            /*left: 362px;*/
+            position: absolute;
+            right: 0px;
+        }
+        
+        .options-box {
+            background: #000;
+            height: 100%;
+            line-height: 35px;
+            padding: 10px 10px 30px 10px;
+            text-align: left;
+            width: 300px;
+            position: absolute;
+            /* This trasform moves the drawer off canvas. */
+            -webkit-transform: translate(-300px, 0);
+            transform: translate(-300px, 0);
+            /* Optionally, we animate the drawer. */
+            transition: transform 0.3s ease;
+        }
+        
+        .options-box.toggled {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+        }
+        
+        #map.toggled {
+            position: absolute;
+            margin-right: -300px;
+            transition: transform 0.3s ease;
+        }
+        /* Sidebar Styles */
+        
+        .sidebar-nav {
+            position: relative;
+            top: 0;
+            width: 250px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            text-indent: 20px;
+            line-height: 40px;
+        }
+        
+        .sidebar-nav li a {
+            display: block;
+            text-decoration: none;
+            color: #999999;
+        }
+        
+        .sidebar-nav li a:hover {
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus {
+            text-decoration: none;
+        }
+        
+        .sidebar-nav>.sidebar-brand {
+            height: 65px;
+            font-size: 18px;
+            line-height: 60px;
+        }
+        
+        .sidebar-nav>.sidebar-brand a {
+            color: #999999;
+        }
+        
+        .sidebar-nav>.sidebar-brand a:hover {
+            color: #fff;
+            background: none;
+        }
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
