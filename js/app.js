@@ -13,12 +13,12 @@ function initMap() {
     //View model creation and binding
     var viewM = new ViewModel();
     ko.applyBindings(viewM);
-    
+
 }
 
 
-//myLoc is the location object that the viewM will use
-var myLoc = function(data) {
+//MyLoc is the location object that the viewM will use
+var MyLoc = function(data) {
     var self = this;
     self.title = data.title;
     self.location = data.location;
@@ -46,7 +46,7 @@ var ViewModel = function() {
 
     // loop converting model to the observable array
     locations.forEach(function(data) {
-        self.locationList.push(new myLoc(data));
+        self.locationList.push(new MyLoc(data));
     });
 
     self.locationList().forEach(function(data) {
@@ -95,10 +95,10 @@ var ViewModel = function() {
                 for (var i = 0; i < self.locationList().length; i++) {
 
                     if (self.locationList()[i].id == id) {
-                        self.locationList()[i].contentFormat = "<p>Could not reach the FourSquare service, please try again later</p>" ;
+                        self.locationList()[i].contentFormat = "<p>Could not reach the FourSquare service, please try again later</p>";
                     }
                 }
-            self.errorMessage(e.statusText + " on FourSquare api call");
+                errorMessage(e.statusText + " on FourSquare api call");
             }
         });
 
@@ -152,19 +152,24 @@ var ViewModel = function() {
         });
     };
 
-self.errorMessage = function (source) {
-        if (source =='Google Maps'){
-        $('#map').prepend(source);}
-        else
-        console.log(source);
-    };
 
 
 
-};//viewModel
+}; //viewModel
+var hasThrownError = false;
+errorMessage = function(source) {
 
+    if (source == 'Google Maps Failed To load') {
+        $('#map').prepend(source);
+    } else {
+        if (!hasThrownError) {
+            hasThrownError = true;
+            $('#mainNav').append('<h1>' + source + '</h1>');
+        }
+    }
+};
 $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $(".options-box").toggleClass("toggled");
-            $("#map").toggleClass("toggled");
-        });
+    e.preventDefault();
+    $(".options-box").toggleClass("toggled");
+    $("#map").toggleClass("toggled");
+});
