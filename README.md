@@ -3,6 +3,7 @@
 
 ### Opening info window of a preferred location
 * click a marker from the map
+
 or 
 
 * click a location from the side menu
@@ -15,5 +16,5 @@ or
 
 * Click the drop down arrow on the right hand side of the text area to choose without typing
 
-## To clear the filter
+#### To clear the filter
 Erase the text area content and submit
