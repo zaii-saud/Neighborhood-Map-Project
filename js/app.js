@@ -122,7 +122,7 @@ var ViewModel = function() {
     self.filterMarker = function() {
         self.locationList().forEach(function(data) {
 
-            if (self.selectedLocation() == '') {
+            if (self.selectedLocation() === '') {
                 data.marker.setMap(map);
                 data.unfiltered(true);
 
