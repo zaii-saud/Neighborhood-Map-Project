@@ -2,10 +2,10 @@
 <html>
 
 <head>
-<title>Zainab Neighborhood in Halifax</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zainab Neighborhood in Halifax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
- <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -18,21 +18,27 @@
         <div class="options-box toggled">
 
             <div>
-                <form data-bind = "submit: filterMarker">
-                <input list = "locations" name="location" data-bind = "value: selectedLocation">
-                <datalist id = "locations" data-bind ="foreach: locationList" ><option data-bind = " text: title"></datalist><input type="submit" value="Filter" title = "Erase your input to clear the selected filter"></form>             
-                
+                <form data-bind="submit: filterMarker">
+                    <input list="locations" name="location" data-bind="value: selectedLocation">
+                    <datalist id="locations" data-bind="foreach: locationList">
+                        <option data-bind=" text: title">
+                    </datalist>
+                    <input type="submit" value="Filter" title="Erase your input to clear the selected filter">
+                </form>
+
                 <ul class="sidebar-nav" id="list" data-bind="foreach: locationList">
-                   
-                    <li><a href=# data-bind ="text: title, click: $parent.chooseMarker, visible: unfiltered"></a>
+
+                    <li>
+                        <a href=# data-bind="text: title, click: $parent.chooseMarker, visible: unfiltered"></a>
                     </li>
-                   
+
                 </ul>
 
             </div>
-          
+
         </div>
         <div id="map" class="col-12 toggled"></div>
+        <div id="AjaxError"></div>
     </div>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -41,9 +47,9 @@
     <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQvX8xCVu3j33a7F5IFHX0gGebjMIZlr8&v=3&callback=initMap" onerror="viewM.errorMessage('Google Maps')">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQvX8xCVu3j33a7F5IFHX0gGebjMIZlr8&v=3&callback=initMap" onerror="errorMessage('Google Maps Failed To load')">
     </script>
-    
+
 </body>
 
 </html>
