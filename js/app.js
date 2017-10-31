@@ -13,8 +13,7 @@ function initMap() {
     //View model creation and binding
     var viewM = new ViewModel();
     ko.applyBindings(viewM);
-    if(viewM.isMobile()) {$(".options-box").toggleClass("toggled");
-            $("#map").toggleClass("toggled");}
+    
 }
 
 
@@ -75,11 +74,15 @@ var ViewModel = function() {
                 // get the venues from response
                 venue = data.response.hasOwnProperty("venues") ? data.response.venues[0] : '';
                 id = venue.id;
+                var vName, vPhone, vAddress;
+                vName = venue.hasOwnProperty("name") ? venue.name : 'Unnamed Place';
+                vPhone = venue.contact.hasOwnProperty("formattedPhone") ? venue.contact.formattedPhone : 'No contact phone available';
+                vAddress = venue.location.hasOwnProperty("address") ? venue.location.address : 'No Provided address';
                 // loop over the locations to set the correct content format with fourSquare data
                 for (var i = 0; i < self.locationList().length; i++) {
 
                     if (self.locationList()[i].id == id) {
-                        self.locationList()[i].contentFormat = self.locationList()[i].contentFormat.replace(/dummyName/g, venue.name).replace(/dummyPhone/g, venue.contact.formattedPhone).replace(/dummyAddress/g, venue.location.address);
+                        self.locationList()[i].contentFormat = self.locationList()[i].contentFormat.replace(/dummyName/g, vName).replace(/dummyPhone/g, vPhone).replace(/dummyAddress/g, vAddress);
 
                     }
                 }
@@ -88,7 +91,14 @@ var ViewModel = function() {
 
             // on error
             error: function(e) {
-                infowindow.setContent('<p>Could not reach the FourSquare service, please try again later</p>');
+                //infowindow.setContent('<p>Could not reach the FourSquare service, please try again later</p>');
+                for (var i = 0; i < self.locationList().length; i++) {
+
+                    if (self.locationList()[i].id == id) {
+                        self.locationList()[i].contentFormat = "<p>Could not reach the FourSquare service, please try again later</p>" ;
+                    }
+                }
+            self.errorMessage(e.statusText + " on FourSquare api call");
             }
         });
 
@@ -97,6 +107,7 @@ var ViewModel = function() {
         google.maps.event.addListener(data.marker, 'click', function() {
 
             infowindow.open(map, this);
+            data.marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
                 data.marker.setAnimation(null);
             }, 1200);
@@ -141,6 +152,12 @@ var ViewModel = function() {
         });
     };
 
+self.errorMessage = function (source) {
+        if (source =='Google Maps'){
+        $('#map').prepend(source);}
+        else
+        console.log(source);
+    };
 
 
 
